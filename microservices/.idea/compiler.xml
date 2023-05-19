@@ -13,7 +13,6 @@
         <module name="api-gateway" />
         <module name="inventory-service" />
         <module name="order-service" />
-        <module name="user-service" />
         <module name="service-discovery" />
         <module name="notification-service" />
       </profile>
@@ -30,7 +29,6 @@
       <module name="order-service" options="-parameters" />
       <module name="service-discovery" options="-parameters" />
       <module name="untitled" options="-parameters" />
-      <module name="user-service" options="-parameters" />
     </option>
   </component>
 </project>

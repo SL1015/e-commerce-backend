@@ -1,14 +1,14 @@
 package com.petcove.inventoryservice.model.adapter;
 
 import com.petcove.inventoryservice.dto.InventoryDto;
-import com.petcove.inventoryservice.dto.ProductCreateRequest;
+import com.petcove.inventoryservice.dto.ProductAddRequest;
 import com.petcove.inventoryservice.model.Inventory;
 
 public class InventoryAdapter {
-    public static Inventory RequestToEntity(ProductCreateRequest productCreateRequest){
+    public static Inventory RequestToEntity(ProductAddRequest productAddRequest){
         return Inventory.builder()
-                .skuCode(productCreateRequest.getSkuCode())
-                .quantity(productCreateRequest.getQuantity())
+                .skuCode(productAddRequest.getSkuCode())
+                .quantity(productAddRequest.getQuantity())
                 .build();
     }
 

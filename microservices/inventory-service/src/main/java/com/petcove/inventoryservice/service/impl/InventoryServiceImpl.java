@@ -2,7 +2,8 @@ package com.petcove.inventoryservice.service.impl;
 
 import com.petcove.inventoryservice.dto.InventoryDto;
 import com.petcove.inventoryservice.dto.InventoryResponse;
-import com.petcove.inventoryservice.dto.ProductCreateRequest;
+import com.petcove.inventoryservice.dto.ProductAddRequest;
+import com.petcove.inventoryservice.model.Inventory;
 import com.petcove.inventoryservice.exception.ProductNotFoundException;
 import com.petcove.inventoryservice.model.adapter.InventoryAdapter;
 import com.petcove.inventoryservice.repository.InventoryRepository;
@@ -48,19 +49,19 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public InventoryDto createProduct(ProductCreateRequest productCreateRequest) {
+    public InventoryDto createProduct(ProductAddRequest productAddRequest) {
         log.debug("createProduct() is called");
-        log.info("Product is created" + productCreateRequest);
-        return InventoryAdapter.EntityToDto(inventoryRepository.save(InventoryAdapter.RequestToEntity(productCreateRequest)));
+        log.info("Product is created" + productAddRequest);
+        return InventoryAdapter.EntityToDto(inventoryRepository.save(InventoryAdapter.RequestToEntity(productAddRequest)));
     }
 
     @Override
-    public InventoryDto updateProduct(String skuCode, ProductCreateRequest productCreateRequest) {
+    public InventoryDto updateProduct(String skuCode, ProductAddRequest productAddRequest) {
         log.debug("updateProduct() is called");
-        log.info("Product is updated" + productCreateRequest);
+        log.info("Product is updated" + productAddRequest);
         return inventoryRepository.findBySkuCode(skuCode)
                 .map(inventory -> {
-                    inventory.setQuantity(productCreateRequest.getQuantity());
+                    inventory.setQuantity(productAddRequest.getQuantity());
                     return InventoryAdapter.EntityToDto(inventoryRepository.save(inventory));
                 })
                 .orElseThrow(ProductNotFoundException::new);

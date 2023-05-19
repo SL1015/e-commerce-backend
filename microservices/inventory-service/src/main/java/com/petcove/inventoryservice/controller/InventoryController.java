@@ -2,15 +2,18 @@ package com.petcove.inventoryservice.controller;
 
 import com.petcove.inventoryservice.dto.InventoryDto;
 import com.petcove.inventoryservice.dto.InventoryResponse;
-import com.petcove.inventoryservice.dto.ProductCreateRequest;
+import com.petcove.inventoryservice.dto.ProductAddRequest;
 import com.petcove.inventoryservice.service.InventoryService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/inventory")
@@ -29,16 +32,16 @@ public class InventoryController {
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<InventoryDto> createProduct(@RequestBody ProductCreateRequest productCreateRequest) {
+    public ResponseEntity<InventoryDto> createProduct(@RequestBody ProductAddRequest productAddRequest) {
         log.info("POST /api/inventory is called");
-        return new ResponseEntity<>(inventoryService.createProduct(productCreateRequest), HttpStatus.CREATED);
+        return new ResponseEntity<>(inventoryService.createProduct(productAddRequest), HttpStatus.CREATED);
     }
 
     @PutMapping("/{skuCode}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<InventoryDto> updateProduct(@PathVariable String skuCode, @RequestBody ProductCreateRequest productCreateRequest) {
+    public ResponseEntity<InventoryDto> updateProduct(@PathVariable String skuCode, @RequestBody ProductAddRequest productAddRequest) {
         log.info("PUT /api/inventory/{} is called", skuCode);
-        return new ResponseEntity<>(inventoryService.updateProduct(skuCode, productCreateRequest), HttpStatus.OK);
+        return new ResponseEntity<>(inventoryService.updateProduct(skuCode, productAddRequest), HttpStatus.OK);
     }
 
     @DeleteMapping("/{skuCode}")
