@@ -10,8 +10,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="api-gateway" />
         <module name="inventory-service" />
+        <module name="payment-service" />
+        <module name="api-gateway" />
         <module name="order-service" />
         <module name="user-service" />
         <module name="service-discovery" />
@@ -28,6 +29,7 @@
       <module name="inventory-service" options="-parameters" />
       <module name="notification-service" options="-parameters" />
       <module name="order-service" options="-parameters" />
+      <module name="payment-service" options="-parameters" />
       <module name="service-discovery" options="-parameters" />
       <module name="untitled" options="-parameters" />
       <module name="user-service" options="-parameters" />

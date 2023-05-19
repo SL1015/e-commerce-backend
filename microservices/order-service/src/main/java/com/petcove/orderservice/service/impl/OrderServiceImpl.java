@@ -2,6 +2,7 @@ package com.petcove.orderservice.service.impl;
 
 import com.nimbusds.jose.shaded.gson.Gson;
 import com.petcove.orderservice.dto.InventoryResponse;
+import com.petcove.orderservice.dto.OrderDto;
 import com.petcove.orderservice.dto.OrderLineItemsDto;
 import com.petcove.orderservice.dto.OrderRequest;
 import com.petcove.orderservice.event.OrderPlacedEvent;
@@ -11,6 +12,7 @@ import com.petcove.orderservice.model.OrderStatus;
 import com.petcove.orderservice.model.adapter.OrderAdapter;
 import com.petcove.orderservice.repository.OrderRepository;
 import com.petcove.orderservice.service.OrderService;
+import com.petcove.orderservice.exception.OrderNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
@@ -73,7 +75,14 @@ public class OrderServiceImpl implements OrderService {
             log.info("else");
             throw new IllegalArgumentException("Product is not in stock at the moment.");
         }
-
+    }
+    public OrderDto updateOrder(String orderNumber, OrderStatus orderStatus, OrderRequest orderRequest){
+        return orderRepository.findByOrderNumber(orderNumber).map(order -> {
+            order.setOrderStatus(orderStatus);
+            order.setTotalAmount(orderRequest.getTotalAmount());
+            order.setOrderLineItemsList(OrderAdapter.toOrderItemEntityList(orderRequest.getOrderLineItemsDtoList(), order));
+            return OrderAdapter.toOrderDto(orderRepository.save(order));
+        }).orElseThrow(OrderNotFoundException::new);
     }
     public OrderLineItems DtoToOrderItems(OrderLineItemsDto orderLineItemsDto){
         OrderLineItems orderLineItems = new OrderLineItems();

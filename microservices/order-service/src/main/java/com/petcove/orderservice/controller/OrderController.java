@@ -1,6 +1,8 @@
 package com.petcove.orderservice.controller;
 
+import com.petcove.orderservice.dto.OrderDto;
 import com.petcove.orderservice.dto.OrderRequest;
+import com.petcove.orderservice.model.OrderStatus;
 import com.petcove.orderservice.service.OrderService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
@@ -8,6 +10,7 @@ import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.CompletableFuture;
@@ -38,5 +41,11 @@ public class OrderController {
     public CompletableFuture<String> fallbackMethod(OrderRequest orderRequest, IllegalArgumentException illegalArgumentException){
 
         return CompletableFuture.supplyAsync(()->"Product is not in stock at the moment.");
+    }
+
+    @PutMapping("/{orderNumber}")
+    public ResponseEntity<OrderDto> updateOrder(@PathVariable("orderNumber") String orderNumber, @RequestBody OrderStatus orderStatus, OrderRequest orderRequest) {
+        log.debug("/api/v1/orders/{} is called with PUT method", orderNumber);
+        return new ResponseEntity<>(orderService.updateOrder(orderNumber,orderStatus,orderRequest), HttpStatus.OK);
     }
 }
