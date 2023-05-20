@@ -19,6 +19,8 @@ public class Payment {
     private String orderNumber;
     private Long customerId;
     private BigDecimal totalAmount;
+
+    @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
     //private LocalDateTime paymentDate;
 }

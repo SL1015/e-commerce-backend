@@ -27,6 +27,7 @@ public class PaymentServiceImpl implements PaymentService {
         Payment payment = PaymentAdapter.toPayment(paymentRequest);
         PaymentEvent paymentEvent = PaymentAdapter.toPaymentEvent(payment);
         paymentRepository.save(payment);
+        log.info(payment.getPaymentStatus().toString());
         kafkaTemplate.send("paymentEvent",paymentEvent);
         return PaymentAdapter.toPaymentResponse(payment);
     }

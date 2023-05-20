@@ -10,12 +10,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class PaymentAdapter {
     public static Payment toPayment(PaymentRequest paymentRequest){
-        Payment payment = new Payment();
-        payment.setCustomerId(paymentRequest.getCustomerId());
-        payment.setTotalAmount(paymentRequest.getTotalAmount());
-        payment.setOrderNumber(paymentRequest.getOrderNumber());
-        payment.setPaymentStatus(PaymentStatus.PAID);
-        return payment;
+        return Payment.builder()
+                .customerId(paymentRequest.getCustomerId())
+                .totalAmount(paymentRequest.getTotalAmount())
+                .orderNumber(paymentRequest.getOrderNumber())
+                .paymentStatus(PaymentStatus.PAID)
+                .build();
     }
     public static PaymentResponse toPaymentResponse(Payment payment) {
         return PaymentResponse.builder()
