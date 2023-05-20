@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Data
 @Builder
 public class PaymentResponse {
-    private Long id;
+    //private Long id;
 
     private String orderNumber;
 
