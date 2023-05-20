@@ -22,7 +22,7 @@ public class InventoryController {
     // request param: http://localhost:8082/api/inventory?skuCode=racket1&skuCode=racket1-red
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    //判断product是否in stock
+    // decide if the product is in stock
     public List<InventoryResponse> isInStock(@RequestParam List<String> skuCode, @RequestParam List<Integer> quantity){
         return inventoryService.isInstock(skuCode,quantity);
 
@@ -39,6 +39,13 @@ public class InventoryController {
     public ResponseEntity<InventoryDto> updateProduct(@PathVariable String skuCode, @RequestBody ProductCreateRequest productCreateRequest) {
         log.info("PUT /api/inventory/{} is called", skuCode);
         return new ResponseEntity<>(inventoryService.updateProduct(skuCode, productCreateRequest), HttpStatus.OK);
+    }
+
+    @GetMapping("/{skuCode}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<InventoryDto> getProduct(@PathVariable String skuCode) {
+        log.info("GET /api/inventory/{} is called", skuCode);
+        return new ResponseEntity<>(inventoryService.getProduct(skuCode), HttpStatus.OK);
     }
 
     @DeleteMapping("/{skuCode}")

@@ -45,7 +45,17 @@ public class OrderController {
 
     @PutMapping("/{orderNumber}")
     public ResponseEntity<OrderDto> updateOrder(@PathVariable("orderNumber") String orderNumber, @RequestBody OrderStatus orderStatus, OrderRequest orderRequest) {
-        log.debug("/api/v1/orders/{} is called with PUT method", orderNumber);
         return new ResponseEntity<>(orderService.updateOrder(orderNumber,orderStatus,orderRequest), HttpStatus.OK);
+    }
+
+    @GetMapping("/{orderNumber}")
+    public ResponseEntity<OrderDto> getOrder(@PathVariable String orderNumber) {
+        log.debug("Request received to get customer with id: {}", orderNumber);
+        return new ResponseEntity<>(orderService.getOrder(orderNumber),  HttpStatus.OK);
+    }
+    @DeleteMapping("/{orderNumber}")
+    public ResponseEntity<OrderDto> cancelOrder(@PathVariable String orderNumber) {
+        orderService.cancelOrder(orderNumber);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
