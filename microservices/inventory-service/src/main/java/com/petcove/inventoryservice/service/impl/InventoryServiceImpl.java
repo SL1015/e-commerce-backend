@@ -65,6 +65,10 @@ public class InventoryServiceImpl implements InventoryService {
                 })
                 .orElseThrow(ProductNotFoundException::new);
     }
+    @Override
+    public InventoryDto getProduct(String skuCode){
+        return inventoryRepository.findBySkuCode(skuCode).map(InventoryAdapter::EntityToDto).orElseThrow(ProductNotFoundException::new);
+    }
 
     @Override
     public void deleteProduct(String skuCode) {

@@ -21,7 +21,8 @@ import java.util.*;
 public interface OrderService {
     String placeOrder(OrderRequest orderRequest);
     OrderDto updateOrder(String orderNumber, OrderStatus orderStatus, OrderRequest orderRequest);
-
+    OrderDto getOrder(String orderNumber);
+    void cancelOrder(String orderNumber);
     OrderLineItems DtoToOrderItems(OrderLineItemsDto orderLineItemsDto);
     //OrderLineItems mapToDto(OrderLineItemsDto orderLineItemsDto);
 }

@@ -11,7 +11,7 @@ public interface InventoryService {
     List<InventoryResponse> isInstock(List<String> skuCode, List<Integer> quantity);
     InventoryDto createProduct(ProductCreateRequest productCreateRequest);
     InventoryDto updateProduct(String skuCode, ProductCreateRequest productCreateRequest);
-
+    InventoryDto getProduct(String skuCode);
     void deleteProduct(String skuCode);
 }
 

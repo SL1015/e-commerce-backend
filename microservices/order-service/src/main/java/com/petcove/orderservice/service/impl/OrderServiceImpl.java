@@ -84,6 +84,15 @@ public class OrderServiceImpl implements OrderService {
             return OrderAdapter.toOrderDto(orderRepository.save(order));
         }).orElseThrow(OrderNotFoundException::new);
     }
+
+    public OrderDto getOrder(String orderNumber){
+        return orderRepository.findByOrderNumber(orderNumber).map(OrderAdapter::toOrderDto).orElseThrow(OrderNotFoundException::new);
+    }
+
+    public void cancelOrder(String orderNumber) {
+        log.info("Order {} is canceled", orderNumber);
+        orderRepository.deleteByOrderNumber(orderNumber);
+    }
     public OrderLineItems DtoToOrderItems(OrderLineItemsDto orderLineItemsDto){
         OrderLineItems orderLineItems = new OrderLineItems();
         orderLineItems.setPrice(orderLineItemsDto.getPrice());
