@@ -25,5 +25,4 @@ public class UserDto {
 
     private List<String> address;
 
-    private String usertype;
 }

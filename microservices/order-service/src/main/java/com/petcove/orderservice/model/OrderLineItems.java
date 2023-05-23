@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Builder
 public class OrderLineItems {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,7 +27,8 @@ public class OrderLineItems {
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_id")
+    //@JoinColumn(name = "order")
     private Order order;
 }

@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 public class OrderItemEvent implements Serializable {
-    private Long id;
+    private String orderNumber;
 
     private String skuCode;
 

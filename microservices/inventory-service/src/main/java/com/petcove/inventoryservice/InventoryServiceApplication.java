@@ -14,6 +14,7 @@ import org.springframework.kafka.support.converter.StringJsonMessageConverter;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 import javax.swing.*;
+import java.math.BigDecimal;
 
 @SpringBootApplication
 @EnableJpaRepositories
@@ -26,11 +27,21 @@ public class InventoryServiceApplication {
 		return args -> {
 			Inventory inventory = new Inventory();
 			inventory.setSkuCode("racket");
-			inventory.setQuantity(15);
+			inventory.setQuantity(155);
+			inventory.setCategory("Badminton");
+			inventory.setBrand("Yonex");
+			inventory.setPrice(BigDecimal.valueOf(199));
+			inventory.setDescription("A balanced badminton racket.");
+			inventory.setColor("Purple");
 
 			Inventory inventory1 = new Inventory();
 			inventory1.setSkuCode("racket1_red");
-			inventory1.setQuantity(4);
+			inventory1.setQuantity(166);
+			inventory1.setCategory("Badminton");
+			inventory1.setBrand("Yonex");
+			inventory1.setPrice(BigDecimal.valueOf(235));
+			inventory1.setDescription("A Head-heavy racket that improves smash performance.");
+			inventory1.setColor("Red");
 
 			inventoryRepository.save(inventory);
 			inventoryRepository.save(inventory1);

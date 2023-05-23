@@ -14,9 +14,8 @@ import java.util.Map;
 @NoArgsConstructor
 public class OrderPlacedEvent implements Serializable {
 
-    private Long orderId;
+    private String orderNumber;
     private Long customerId;
     private BigDecimal totalAmount;
-
     private List<OrderItemEvent> orderItems;
 }

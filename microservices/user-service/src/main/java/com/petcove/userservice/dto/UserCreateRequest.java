@@ -27,7 +27,4 @@ public class UserCreateRequest {
     @NotEmpty(message = "Addresses is mandatory")
     private List<String> addresses;
 
-    @NotBlank(message = "User type is mandatory")
-    private String usertype;
-
 }

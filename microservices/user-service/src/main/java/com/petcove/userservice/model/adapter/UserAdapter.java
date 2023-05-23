@@ -15,7 +15,6 @@ public class UserAdapter {
         user.setPassword(userCreateRequest.getPassword());
         user.setPhone(userCreateRequest.getPhone());
         user.setAddress(userCreateRequest.getAddresses());
-        user.setUsertype(userCreateRequest.getUsertype());
         return user;
     }
 
@@ -28,7 +27,6 @@ public class UserAdapter {
                 .password(user.getPassword())
                 .phone(user.getPhone())
                 .address(user.getAddress())
-                .usertype(user.getUsertype())
                 .build();
     }
 

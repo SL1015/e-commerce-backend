@@ -1,6 +1,5 @@
 package com.petcove.orderservice.service.impl;
 
-import com.nimbusds.jose.shaded.gson.Gson;
 import com.petcove.orderservice.dto.InventoryResponse;
 import com.petcove.orderservice.dto.OrderDto;
 import com.petcove.orderservice.dto.OrderLineItemsDto;
@@ -15,12 +14,12 @@ import com.petcove.orderservice.service.OrderService;
 import com.petcove.orderservice.exception.OrderNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @Service
@@ -32,6 +31,8 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final WebClient.Builder webClientBuilder;
     private final KafkaTemplate<String, OrderPlacedEvent> kafkaTemplate;
+    private BigDecimal totalAmount;
+
     public String placeOrder(OrderRequest orderRequest){
 
         Order order = OrderAdapter.toOrderEntity(orderRequest);
@@ -60,12 +61,30 @@ public class OrderServiceImpl implements OrderService {
         log.info(Arrays.toString(inventoryResponseArr));
         log.info(String.valueOf(allProductsInStock));
 
+
         if(allProductsInStock){
             order.setOrderStatus(OrderStatus.PLACED);
+            List<OrderLineItems> orderItems = order.getOrderLineItemsList();
+            totalAmount = order.getTotalAmount();
+            log.info(totalAmount.toString());
+            for(InventoryResponse inventoryResponse:inventoryResponseArr){
+                for(OrderLineItems orderItem:orderItems){
+                    if(Objects.equals(orderItem.getSkuCode(), inventoryResponse.getSkuCode())){
+                        orderItem.setPrice(inventoryResponse.getPrice());
+                        BigDecimal itemAmount = orderItem.getPrice().multiply(BigDecimal.valueOf(orderItem.getQuantity()));
+                        this.totalAmount =totalAmount.add(itemAmount);
+                        log.info(totalAmount.toString());
+                    }
+                }
+            }
+            log.info(totalAmount.toString());
+            order.setTotalAmount(totalAmount);
+            log.info(order.getOrderLineItemsList().toString());
             orderRepository.save(order);
+
             // send the order placed event as a msg to the notification topic
             //kafkaTemplate.send("notificationTopic", new OrderPlacedEvent(order.getOrderNumber()));
-            kafkaTemplate.send("orderplacedEvent", new OrderPlacedEvent(order.getId()
+            kafkaTemplate.send("orderplacedEvent", new OrderPlacedEvent(order.getOrderNumber()
                     , order.getCustomerId()
                     , order.getTotalAmount()
                     , OrderAdapter.toOrderItemEventList(order.getOrderLineItemsList())));
@@ -79,7 +98,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderDto updateOrder(String orderNumber, OrderStatus orderStatus, OrderRequest orderRequest){
         return orderRepository.findByOrderNumber(orderNumber).map(order -> {
             order.setOrderStatus(orderStatus);
-            order.setTotalAmount(orderRequest.getTotalAmount());
+            //order.setTotalAmount(orderRequest.getTotalAmount());
             order.setOrderLineItemsList(OrderAdapter.toOrderItemEntityList(orderRequest.getOrderLineItemsDtoList(), order));
             return OrderAdapter.toOrderDto(orderRepository.save(order));
         }).orElseThrow(OrderNotFoundException::new);
@@ -92,13 +111,6 @@ public class OrderServiceImpl implements OrderService {
     public void cancelOrder(String orderNumber) {
         log.info("Order {} is canceled", orderNumber);
         orderRepository.deleteByOrderNumber(orderNumber);
-    }
-    public OrderLineItems DtoToOrderItems(OrderLineItemsDto orderLineItemsDto){
-        OrderLineItems orderLineItems = new OrderLineItems();
-        orderLineItems.setPrice(orderLineItemsDto.getPrice());
-        orderLineItems.setQuantity(orderLineItemsDto.getQuantity());
-        orderLineItems.setSkuCode(orderLineItemsDto.getSkuCode());
-        return orderLineItems;
     }
 
 }

@@ -30,7 +30,4 @@ public class User {
     @ElementCollection
     private List<String> address;
 
-    //@Enumerated(EnumType.STRING)
-    private String usertype;
-
 }
