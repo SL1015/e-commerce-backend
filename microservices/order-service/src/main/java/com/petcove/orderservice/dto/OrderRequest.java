@@ -28,18 +28,17 @@ public class OrderRequest {
     @JsonProperty("customer_id")
     private Long customerId;
 
+/*
     //@DecimalMin(value = "0.0", message = "Total amount must be greater than or equal to 0")
     @JsonProperty("total_amount")
     private BigDecimal totalAmount;
-/*
+
     //@NotNull(message = "Order date cannot be null")
     @JsonProperty("order_date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime orderDate;
     */
 
-    //@NotEmpty(message = "Order Items cannot be empty")
-    //@Valid
     @JsonProperty("order_items")
     private List<OrderLineItemsDto> orderLineItemsDtoList;
 

@@ -9,14 +9,23 @@ public class InventoryAdapter {
         return Inventory.builder()
                 .skuCode(productCreateRequest.getSkuCode())
                 .quantity(productCreateRequest.getQuantity())
+                .brand(productCreateRequest.getBrand())
+                .category(productCreateRequest.getCategory())
+                .color(productCreateRequest.getColor())
+                .description(productCreateRequest.getDescription())
+                .price(productCreateRequest.getPrice())
                 .build();
     }
 
     public static InventoryDto EntityToDto(Inventory inventory) {
         return InventoryDto.builder()
-                .id(inventory.getId())
                 .skuCode(inventory.getSkuCode())
                 .quantity(inventory.getQuantity())
+                .description(inventory.getDescription())
+                .color(inventory.getColor())
+                .brand(inventory.getBrand())
+                .category(inventory.getCategory())
+                .price(inventory.getPrice())
                 .build();
     }
 }

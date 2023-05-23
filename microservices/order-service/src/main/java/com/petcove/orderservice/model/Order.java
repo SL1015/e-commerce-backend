@@ -16,9 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @Column(name = "customer_id", nullable = false)
     private Long customerId;
@@ -28,7 +25,7 @@ public class Order {
 
     //@Column(name = "order_date", nullable = false)
     //private LocalDateTime orderDate;
-
+    @Id
     @Column(name = "order_number", nullable = false)
     private String orderNumber;
 

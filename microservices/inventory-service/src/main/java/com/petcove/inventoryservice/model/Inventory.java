@@ -3,6 +3,9 @@ package com.petcove.inventoryservice.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
+
 @Entity
 @Table(name= "t_inventory")
 @Getter
@@ -12,8 +15,11 @@ import lombok.*;
 @NoArgsConstructor
 public class Inventory {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String skuCode;
     private Integer quantity;
+    private String description;
+    private BigDecimal price;
+    private String category;
+    private String color;
+    private String brand;
 }

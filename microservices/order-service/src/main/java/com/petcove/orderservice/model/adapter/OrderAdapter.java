@@ -9,6 +9,7 @@ import com.petcove.orderservice.model.OrderLineItems;
 import com.petcove.orderservice.model.OrderStatus;
 import lombok.extern.slf4j.Slf4j;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -19,7 +20,7 @@ public class OrderAdapter {
     public static Order toOrderEntity(OrderRequest orderRequest) {
         Order order = Order.builder()
                 .customerId(orderRequest.getCustomerId())
-                .totalAmount(orderRequest.getTotalAmount())
+                .totalAmount(BigDecimal.valueOf(0))
                 //.orderDate(orderAddRequest.getOrderDate())
                 .orderNumber(UUID.randomUUID().toString())
                 .orderStatus(OrderStatus.PENDING)
@@ -31,11 +32,11 @@ public class OrderAdapter {
     }
     public static OrderLineItems toOrderItemEntity(OrderLineItemsDto orderLineItemsDto, Order order) {
         return OrderLineItems.builder()
-                .id(orderLineItemsDto.getId())
                 .skuCode(orderLineItemsDto.getSkuCode())
                 .quantity(orderLineItemsDto.getQuantity())
-                .price(orderLineItemsDto.getPrice())
+                //.price(orderLineItemsDto.getPrice())
                 .order(order)
+                //.orderNumber(order.getOrderNumber())
                 .build();
     }
     public static List<OrderLineItems> toOrderItemEntityList(List<OrderLineItemsDto> orderItemAddRequests, Order order) {
@@ -47,7 +48,7 @@ public class OrderAdapter {
     //items to event
     public static OrderItemEvent toOrderItemEvent(OrderLineItems orderItems) {
         return OrderItemEvent.builder()
-                .id(orderItems.getId())
+                .orderNumber(orderItems.getOrder().getOrderNumber())
                 .skuCode(orderItems.getSkuCode())
                 .quantity(orderItems.getQuantity())
                 .price(orderItems.getPrice())
@@ -62,7 +63,7 @@ public class OrderAdapter {
     //Dto to entity
     public static OrderLineItems DtoToOrderItems(OrderLineItemsDto orderLineItemsDto){
         OrderLineItems orderLineItems = new OrderLineItems();
-        orderLineItems.setPrice(orderLineItemsDto.getPrice());
+        //orderLineItems.setPrice(orderLineItemsDto.getPrice());
         orderLineItems.setQuantity(orderLineItemsDto.getQuantity());
         orderLineItems.setSkuCode(orderLineItemsDto.getSkuCode());
         return orderLineItems;
@@ -72,8 +73,7 @@ public class OrderAdapter {
     //orderitems to orderitemsDto
     public static OrderLineItemsDto toOrderItemsDto(OrderLineItems orderLineItems){
         OrderLineItemsDto orderLineItemsDto = new OrderLineItemsDto();
-        orderLineItemsDto.setId(orderLineItems.getId());
-        orderLineItemsDto.setPrice(orderLineItems.getPrice());
+        //orderLineItemsDto.setPrice(orderLineItems.getPrice());
         orderLineItemsDto.setQuantity(orderLineItems.getQuantity());
         orderLineItemsDto.setSkuCode(orderLineItems.getSkuCode());
         return orderLineItemsDto;

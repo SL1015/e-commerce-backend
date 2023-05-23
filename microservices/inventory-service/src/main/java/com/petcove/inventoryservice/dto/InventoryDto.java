@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Data
 @Builder
@@ -13,9 +14,11 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class InventoryDto implements Serializable {
 
-    private Long id;
-
     private Integer quantity;
-
     private String skuCode;
+    private String description;
+    private BigDecimal price;
+    private String category;
+    private String color;
+    private String brand;
 }

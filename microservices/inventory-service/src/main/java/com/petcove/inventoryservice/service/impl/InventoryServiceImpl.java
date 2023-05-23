@@ -42,6 +42,7 @@ public class InventoryServiceImpl implements InventoryService {
                 .map(inventory ->
                         InventoryResponse.builder()
                                 .skuCode(inventory.getSkuCode())
+                                .price(inventory.getPrice())
                                 .isInStock(inventory.getQuantity() >= sku_quan_map.get(inventory.getSkuCode()))
                                 .build()
                 ).toList();
@@ -61,6 +62,11 @@ public class InventoryServiceImpl implements InventoryService {
         return inventoryRepository.findBySkuCode(skuCode)
                 .map(inventory -> {
                     inventory.setQuantity(productCreateRequest.getQuantity());
+                    inventory.setPrice(productCreateRequest.getPrice());
+                    inventory.setBrand(productCreateRequest.getBrand());
+                    inventory.setColor(productCreateRequest.getColor());
+                    inventory.setCategory(productCreateRequest.getCategory());
+                    inventory.setDescription(productCreateRequest.getDescription());
                     return InventoryAdapter.EntityToDto(inventoryRepository.save(inventory));
                 })
                 .orElseThrow(ProductNotFoundException::new);
