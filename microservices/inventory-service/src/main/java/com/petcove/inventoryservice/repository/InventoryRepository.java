@@ -9,7 +9,7 @@ import org.w3c.dom.Entity;
 import java.util.List;
 import java.util.Optional;
 
-public interface InventoryRepository extends JpaRepository<Inventory,Long> {
+public interface InventoryRepository extends JpaRepository<Inventory,String> {
 
     List<Inventory> findBySkuCodeIn(List<String> skuCode);
     Optional<Inventory> findBySkuCode(String skuCode);

@@ -7,11 +7,15 @@ import com.petcove.paymentservice.model.Payment;
 import com.petcove.paymentservice.model.adapter.PaymentAdapter;
 import com.petcove.paymentservice.repository.PaymentRepository;
 import com.petcove.paymentservice.service.PaymentService;
+import com.petcove.paymentservice.exception.PaymentNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.petcove.paymentservice.model.adapter.PaymentAdapter.toPayment;
 import static com.petcove.paymentservice.model.adapter.PaymentAdapter.toPaymentResponse;
@@ -30,5 +34,24 @@ public class PaymentServiceImpl implements PaymentService {
         log.info(payment.getPaymentStatus().toString());
         kafkaTemplate.send("paymentEvent",paymentEvent);
         return PaymentAdapter.toPaymentResponse(payment);
+    }
+    public PaymentResponse getPayment(Long id){
+        return PaymentAdapter.toPaymentResponse(paymentRepository.findById(id).orElseThrow(PaymentNotFoundException::new));
+    }
+
+    public PaymentResponse getPaymentByOrderNumber(String orderNumber){
+        return PaymentAdapter.toPaymentResponse(paymentRepository.findByOrderNumber(orderNumber).orElseThrow(PaymentNotFoundException::new));
+    }
+
+    public List<PaymentResponse> getPaymentsByCustomerId(Long customerId){
+        return paymentRepository.findByCustomerId(customerId).stream().map(PaymentAdapter::toPaymentResponse).collect(Collectors.toList());
+    }
+    public PaymentResponse updatePayment(Long id, PaymentRequest paymentRequest){
+        return PaymentAdapter.toPaymentResponse(paymentRepository.findById(id).map(payment -> {
+            payment.setOrderNumber(paymentRequest.getOrderNumber());
+            payment.setCustomerId(paymentRequest.getCustomerId());
+            payment.setTotalAmount(paymentRequest.getTotalAmount());
+            return paymentRepository.save(payment);
+        }).orElseThrow(PaymentNotFoundException::new));
     }
 }
