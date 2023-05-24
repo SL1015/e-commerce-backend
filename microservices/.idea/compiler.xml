@@ -16,10 +16,10 @@
         <module name="order-service" />
         <module name="user-service" />
         <module name="service-discovery" />
-        <module name="notification-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="notification-service" target="17" />
       <module name="untitled" target="19" />
     </bytecodeTargetLevel>
   </component>

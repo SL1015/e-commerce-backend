@@ -20,7 +20,6 @@
         <module>order-service</module>
         <module>service-discovery</module>
         <module>api-gateway</module>
-        <module>notification-service</module>
         <module>user-service</module>
         <module>payment-service</module>
 

@@ -7,10 +7,8 @@ import java.util.List;
 
 public interface PaymentService {
     PaymentResponse createPayment(PaymentRequest paymentRequest);
-
-    //PaymentResponse getPayment(Long id);
-
-    //PaymentResponse updatePayment(Long id, PaymentRequest paymentRequest);
-
-    //List<PaymentResponse> getPaymentsByCustomerId(Long id);
+    PaymentResponse getPayment(Long id);
+    PaymentResponse getPaymentByOrderNumber(String orderNumber);
+    List<PaymentResponse> getPaymentsByCustomerId(Long customerId);
+    PaymentResponse updatePayment(Long id, PaymentRequest paymentRequest);
 }

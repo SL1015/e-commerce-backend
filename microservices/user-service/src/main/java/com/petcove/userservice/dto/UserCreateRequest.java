@@ -15,16 +15,16 @@ public class UserCreateRequest {
     private String name;
 
     @Email
-    @NotBlank(message = "Email is mandatory")
+    @NotBlank(message = "Email is required.")
     private String email;
 
-    @NotBlank(message = "Password is mandatory")
+    @NotBlank(message = "Password is required.")
     private String password;
 
-    @NotBlank(message = "Phone number is mandatory")
+    @NotBlank(message = "Phone number is required.")
     private String phone;
 
-    @NotEmpty(message = "Addresses is mandatory")
+    @NotEmpty(message = "Addresses is required.")
     private List<String> addresses;
 
 }

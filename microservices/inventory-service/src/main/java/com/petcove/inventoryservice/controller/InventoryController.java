@@ -4,6 +4,7 @@ import com.petcove.inventoryservice.dto.InventoryDto;
 import com.petcove.inventoryservice.dto.InventoryResponse;
 import com.petcove.inventoryservice.dto.ProductCreateRequest;
 import com.petcove.inventoryservice.service.InventoryService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -29,14 +30,14 @@ public class InventoryController {
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<InventoryDto> createProduct(@RequestBody ProductCreateRequest productCreateRequest) {
+    public ResponseEntity<InventoryDto> createProduct(@Valid @RequestBody ProductCreateRequest productCreateRequest) {
         log.info("POST /api/inventory is called");
         return new ResponseEntity<>(inventoryService.createProduct(productCreateRequest), HttpStatus.CREATED);
     }
 
     @PutMapping("/{skuCode}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<InventoryDto> updateProduct(@PathVariable String skuCode, @RequestBody ProductCreateRequest productCreateRequest) {
+    public ResponseEntity<InventoryDto> updateProduct(@PathVariable String skuCode, @Valid @RequestBody ProductCreateRequest productCreateRequest) {
         log.info("PUT /api/inventory/{} is called", skuCode);
         return new ResponseEntity<>(inventoryService.updateProduct(skuCode, productCreateRequest), HttpStatus.OK);
     }

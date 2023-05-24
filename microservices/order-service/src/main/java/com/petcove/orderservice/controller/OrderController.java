@@ -7,6 +7,7 @@ import com.petcove.orderservice.service.OrderService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class OrderController {
     @CircuitBreaker(name="inventory", fallbackMethod = "fallbackMethod")
     @TimeLimiter(name="inventory")
     @Retry(name = "inventory")
-    public CompletableFuture<String> placeOrder(@RequestBody OrderRequest orderRequest) {
+    public CompletableFuture<String> placeOrder(@Valid @RequestBody OrderRequest orderRequest) {
         log.info("/api/order is called with POST method");
         return CompletableFuture.supplyAsync(()->orderService.placeOrder(orderRequest));
     }
@@ -44,7 +45,7 @@ public class OrderController {
     }
 
     @PutMapping("/{orderNumber}")
-    public ResponseEntity<OrderDto> updateOrder(@PathVariable("orderNumber") String orderNumber, @RequestBody OrderStatus orderStatus, OrderRequest orderRequest) {
+    public ResponseEntity<OrderDto> updateOrder(@PathVariable("orderNumber") String orderNumber, @Valid @RequestBody OrderStatus orderStatus, OrderRequest orderRequest) {
         return new ResponseEntity<>(orderService.updateOrder(orderNumber,orderStatus,orderRequest), HttpStatus.OK);
     }
 
