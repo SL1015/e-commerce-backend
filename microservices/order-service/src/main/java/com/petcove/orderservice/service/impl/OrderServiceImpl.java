@@ -95,19 +95,22 @@ public class OrderServiceImpl implements OrderService {
             throw new IllegalArgumentException("Product is not in stock at the moment.");
         }
     }
-    public OrderDto updateOrder(String orderNumber, OrderStatus orderStatus, OrderRequest orderRequest){
+    /*
+    @Override
+    public OrderDto updateOrder(String orderNumber, OrderRequest orderRequest){
         return orderRepository.findByOrderNumber(orderNumber).map(order -> {
-            order.setOrderStatus(orderStatus);
-            //order.setTotalAmount(orderRequest.getTotalAmount());
             order.setOrderLineItemsList(OrderAdapter.toOrderItemEntityList(orderRequest.getOrderLineItemsDtoList(), order));
             return OrderAdapter.toOrderDto(orderRepository.save(order));
         }).orElseThrow(OrderNotFoundException::new);
     }
-
+    */
+    @Override
     public OrderDto getOrder(String orderNumber){
+        log.info(orderNumber);
+        log.info(String.valueOf(orderRepository.findByOrderNumber(orderNumber).isEmpty()));
         return orderRepository.findByOrderNumber(orderNumber).map(OrderAdapter::toOrderDto).orElseThrow(OrderNotFoundException::new);
     }
-
+    @Override
     public void cancelOrder(String orderNumber) {
         log.info("Order {} is canceled", orderNumber);
         orderRepository.deleteByOrderNumber(orderNumber);

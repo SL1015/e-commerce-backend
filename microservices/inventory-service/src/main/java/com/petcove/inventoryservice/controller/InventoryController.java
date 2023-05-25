@@ -36,25 +36,22 @@ public class InventoryController {
     }
 
     @PutMapping("/{skuCode}")
-    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<InventoryDto> updateProduct(@PathVariable String skuCode, @Valid @RequestBody ProductCreateRequest productCreateRequest) {
         log.info("PUT /api/inventory/{} is called", skuCode);
         return new ResponseEntity<>(inventoryService.updateProduct(skuCode, productCreateRequest), HttpStatus.OK);
     }
 
     @GetMapping("/{skuCode}")
-    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<InventoryDto> getProduct(@PathVariable String skuCode) {
         log.info("GET /api/inventory/{} is called", skuCode);
         return new ResponseEntity<>(inventoryService.getProduct(skuCode), HttpStatus.OK);
     }
 
     @DeleteMapping("/{skuCode}")
-    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Void> deleteProduct(@PathVariable String skuCode) {
         log.info("DELETE /api/inventory/{} is called", skuCode);
         inventoryService.deleteProduct(skuCode);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

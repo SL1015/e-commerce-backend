@@ -21,7 +21,6 @@ public class OrderLineItems {
     @Column(name = "skuCode", nullable = false)
     private String skuCode;
 
-    @Column(name = "price", nullable = false)
     private BigDecimal price;
 
     @Column(name = "quantity", nullable = false)

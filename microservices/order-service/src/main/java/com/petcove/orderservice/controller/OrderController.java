@@ -12,10 +12,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.CompletableFuture;
 
+@Validated
 @RestController
 @RequestMapping("/api/order")
 @RequiredArgsConstructor
@@ -26,9 +28,9 @@ public class OrderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @CircuitBreaker(name="inventory", fallbackMethod = "fallbackMethod")
-    @TimeLimiter(name="inventory")
-    @Retry(name = "inventory")
+    //@CircuitBreaker(name="inventory", fallbackMethod = "fallbackMethod")
+    //@TimeLimiter(name="inventory")
+    //@Retry(name = "inventory")
     public CompletableFuture<String> placeOrder(@Valid @RequestBody OrderRequest orderRequest) {
         log.info("/api/order is called with POST method");
         return CompletableFuture.supplyAsync(()->orderService.placeOrder(orderRequest));
@@ -43,15 +45,15 @@ public class OrderController {
 
         return CompletableFuture.supplyAsync(()->"Product is not in stock at the moment.");
     }
-
-    @PutMapping("/{orderNumber}")
-    public ResponseEntity<OrderDto> updateOrder(@PathVariable("orderNumber") String orderNumber, @Valid @RequestBody OrderStatus orderStatus, OrderRequest orderRequest) {
-        return new ResponseEntity<>(orderService.updateOrder(orderNumber,orderStatus,orderRequest), HttpStatus.OK);
-    }
+    /*
+    @PutMapping({"/", "/{orderNumber}"})
+    public ResponseEntity<OrderDto> updateOrder(@PathVariable("orderNumber") String orderNumber, @Valid @RequestBody OrderRequest orderRequest) {
+        return new ResponseEntity<>(orderService.updateOrder(orderNumber,orderRequest), HttpStatus.OK);
+    }*/
 
     @GetMapping("/{orderNumber}")
-    public ResponseEntity<OrderDto> getOrder(@PathVariable String orderNumber) {
-        log.debug("Request received to get customer with id: {}", orderNumber);
+    public ResponseEntity<OrderDto> getOrder(@PathVariable("orderNumber") String orderNumber) {
+        log.info("Request received to get order with id: {}", orderNumber);
         return new ResponseEntity<>(orderService.getOrder(orderNumber),  HttpStatus.OK);
     }
     @DeleteMapping("/{orderNumber}")

@@ -8,9 +8,12 @@ import com.petcove.userservice.service.UserService;
 import com.petcove.userservice.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 @Service
 @Repository
@@ -19,6 +22,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    @PersistenceContext
+    private EntityManager entityManager;
+
     @Override
     public UserDto createUser(UserCreateRequest userCreateRequest) {
         log.info("Creating user: {}", userCreateRequest);

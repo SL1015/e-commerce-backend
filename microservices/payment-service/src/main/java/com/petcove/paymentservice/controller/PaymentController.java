@@ -8,10 +8,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Validated
 @RestController
 @RequestMapping("/api/payment")
 @RequiredArgsConstructor
@@ -32,15 +34,14 @@ public class PaymentController {
         return new ResponseEntity<>(paymentService.getPayment(id),  HttpStatus.OK);
     }
 
-    @GetMapping("/{orderNumber}")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<PaymentResponse> getPaymentByOrderId(@PathVariable String orderNumber){
+    @GetMapping(value="/order/{orderNumber}")
+    public ResponseEntity<PaymentResponse> getPaymentByOrderId(@PathVariable("orderNumber") String orderNumber){
         return new ResponseEntity<>(paymentService.getPaymentByOrderNumber(orderNumber),  HttpStatus.OK);
     }
 
-    @GetMapping("/{customerId}")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<PaymentResponse>> getPaymentsByCustomerId(@PathVariable Long customerId){
+    @GetMapping(value="/user/{customerId}")
+    public ResponseEntity<List<PaymentResponse>> getPaymentsByCustomerId(@PathVariable("customerId") Long customerId){
+        log.info("get by customerid");
         return new ResponseEntity<>(paymentService.getPaymentsByCustomerId(customerId),  HttpStatus.OK);
     }
 
