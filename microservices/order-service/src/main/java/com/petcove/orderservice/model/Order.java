@@ -17,19 +17,12 @@ import java.util.List;
 @Builder
 public class Order {
 
-    @Column(name = "customer_id", nullable = false)
     private Long customerId;
-
-    @Column(name = "total_amount", nullable = false)
     private BigDecimal totalAmount;
 
-    //@Column(name = "order_date", nullable = false)
-    //private LocalDateTime orderDate;
     @Id
-    @Column(name = "order_number", nullable = false)
     private String orderNumber;
 
-    @Column(name = "order_status", nullable = false)
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 

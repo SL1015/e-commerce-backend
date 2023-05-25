@@ -22,11 +22,12 @@ import static com.petcove.paymentservice.model.adapter.PaymentAdapter.toPaymentR
 
 @Service
 @RequiredArgsConstructor
-@Transactional
+//@Transactional
 @Slf4j
 public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
     private final KafkaTemplate<String, PaymentEvent> kafkaTemplate;
+    @Override
     public PaymentResponse createPayment(PaymentRequest paymentRequest){
         Payment payment = PaymentAdapter.toPayment(paymentRequest);
         PaymentEvent paymentEvent = PaymentAdapter.toPaymentEvent(payment);
@@ -35,17 +36,20 @@ public class PaymentServiceImpl implements PaymentService {
         kafkaTemplate.send("paymentEvent",paymentEvent);
         return PaymentAdapter.toPaymentResponse(payment);
     }
+    @Override
     public PaymentResponse getPayment(Long id){
         return PaymentAdapter.toPaymentResponse(paymentRepository.findById(id).orElseThrow(PaymentNotFoundException::new));
     }
-
+    @Override
     public PaymentResponse getPaymentByOrderNumber(String orderNumber){
         return PaymentAdapter.toPaymentResponse(paymentRepository.findByOrderNumber(orderNumber).orElseThrow(PaymentNotFoundException::new));
     }
-
+    @Override
     public List<PaymentResponse> getPaymentsByCustomerId(Long customerId){
+        log.info(String.valueOf(customerId));
         return paymentRepository.findByCustomerId(customerId).stream().map(PaymentAdapter::toPaymentResponse).collect(Collectors.toList());
     }
+    @Override
     public PaymentResponse updatePayment(Long id, PaymentRequest paymentRequest){
         return PaymentAdapter.toPaymentResponse(paymentRepository.findById(id).map(payment -> {
             payment.setOrderNumber(paymentRequest.getOrderNumber());

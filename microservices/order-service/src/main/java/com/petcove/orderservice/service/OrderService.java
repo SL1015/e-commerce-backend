@@ -20,7 +20,7 @@ import java.util.*;
 
 public interface OrderService {
     String placeOrder(OrderRequest orderRequest);
-    OrderDto updateOrder(String orderNumber, OrderStatus orderStatus, OrderRequest orderRequest);
+    //OrderDto updateOrder(String orderNumber, OrderRequest orderRequest);
     OrderDto getOrder(String orderNumber);
     void cancelOrder(String orderNumber);
 }
