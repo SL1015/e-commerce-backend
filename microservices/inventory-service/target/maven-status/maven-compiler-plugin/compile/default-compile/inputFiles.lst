@@ -1,0 +1,14 @@
+C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\inventory-service\src\main\java\com\petcove\inventoryservice\event\OrderPlacedEvent.java
+C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\inventory-service\src\main\java\com\petcove\inventoryservice\dto\InventoryResponse.java
+C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\inventory-service\src\main\java\com\petcove\inventoryservice\event\OrderItemEvent.java
+C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\inventory-service\src\main\java\com\petcove\inventoryservice\exception\ProductNotFoundException.java
+C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\inventory-service\src\main\java\com\petcove\inventoryservice\controller\InventoryController.java
+C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\inventory-service\src\main\java\com\petcove\inventoryservice\model\adapter\InventoryAdapter.java
+C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\inventory-service\src\main\java\com\petcove\inventoryservice\repository\InventoryRepository.java
+C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\inventory-service\src\main\java\com\petcove\inventoryservice\model\Inventory.java
+C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\inventory-service\src\main\java\com\petcove\inventoryservice\dto\ProductCreateRequest.java
+C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\inventory-service\src\main\java\com\petcove\inventoryservice\service\impl\InventoryServiceImpl.java
+C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\inventory-service\src\main\java\com\petcove\inventoryservice\consumer\OrderPlacedConsumer.java
+C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\inventory-service\src\main\java\com\petcove\inventoryservice\InventoryServiceApplication.java
+C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\inventory-service\src\main\java\com\petcove\inventoryservice\service\InventoryService.java
+C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\inventory-service\src\main\java\com\petcove\inventoryservice\dto\InventoryDto.java
