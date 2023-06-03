@@ -14,7 +14,7 @@ Docker
 Gateway: 8180  
 Eureka: 8761  
 Key Cloak: 8080
-## Access to the OAuth 2.0 authentication
+## Access to the OAuth 2.0 authorization
 1.	Add a line <code>127.0.0.1 keycloak</code> to the **hosts** file as administrator  
 For **Windows** users, the file is in <code>C:\Windows\System32\drivers\etc</code>;   
 For **Linux and Mac** users, the file is in <code>/etc/</code>.  
