@@ -25,6 +25,6 @@ public class UserCreateRequest {
     private String phone;
 
     @NotEmpty(message = "Addresses is required.")
-    private List<String> addresses;
+    private String addresses;
 
 }

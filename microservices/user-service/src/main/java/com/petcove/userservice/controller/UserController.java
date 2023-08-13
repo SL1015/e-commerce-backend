@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Component
 @RestController
 @RequestMapping("/api/user")
@@ -23,6 +25,11 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
+
+    @GetMapping
+    public ResponseEntity<List<UserDto>> getAllUsers(){
+        return new ResponseEntity<>(userService.getAllUsers(),  HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<UserDto> createCustomer(@Valid @RequestBody UserCreateRequest userCreateRequest) {

@@ -4,6 +4,7 @@ import jakarta.persistence.ElementCollection;
 import jakarta.validation.constraints.Email;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Builder
@@ -12,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class UserDto {
+public class UserDto implements Serializable {
     private Long id;
 
     private String name;
@@ -23,6 +24,6 @@ public class UserDto {
 
     private String phone;
 
-    private List<String> address;
+    private String address;
 
 }

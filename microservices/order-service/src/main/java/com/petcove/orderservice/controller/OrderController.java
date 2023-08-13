@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @Validated
@@ -25,6 +26,11 @@ import java.util.concurrent.CompletableFuture;
 public class OrderController {
 
     private final OrderService orderService;
+
+    @GetMapping
+    public ResponseEntity<List<OrderDto>> getAllOrders(){
+        return new ResponseEntity<>(orderService.getAllOrders(),  HttpStatus.OK);
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
