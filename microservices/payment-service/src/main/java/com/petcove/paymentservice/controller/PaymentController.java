@@ -21,6 +21,12 @@ import java.util.List;
 public class PaymentController {
     private final PaymentService paymentService;
 
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<PaymentResponse>> getAllPayments(){
+        return new ResponseEntity<>(paymentService.getAllPayments(),  HttpStatus.OK);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<PaymentResponse> createPayment(@Valid @RequestBody PaymentRequest paymentRequest){

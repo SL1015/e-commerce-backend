@@ -4,11 +4,12 @@ import com.petcove.paymentservice.model.PaymentStatus;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
 @Builder
-public class PaymentResponse {
+public class PaymentResponse implements Serializable {
     //private Long id;
 
     private String orderNumber;

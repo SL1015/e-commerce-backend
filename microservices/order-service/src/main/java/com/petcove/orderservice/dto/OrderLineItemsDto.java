@@ -7,21 +7,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.validation.constraints.*;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderLineItemsDto {
+public class OrderLineItemsDto implements Serializable {
 
-    //private Long id;
-
-    //@NotNull(message = "SkuCode cannot be null")
-    //@JsonProperty("skuCode")
     private String skuCode;
 
-    //@NotNull
-    //@Min(value = 1, message = "Quantity must be greater than or equal to 1")
     private Integer quantity;
 }

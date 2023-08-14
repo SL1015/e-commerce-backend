@@ -19,8 +19,9 @@ import java.util.*;
 
 
 public interface OrderService {
+    List<OrderDto> getAllOrders();
     String placeOrder(OrderRequest orderRequest);
-    //OrderDto updateOrder(String orderNumber, OrderRequest orderRequest);
     OrderDto getOrder(String orderNumber);
     void cancelOrder(String orderNumber);
+    void doSleepTest();
 }

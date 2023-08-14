@@ -3,6 +3,8 @@ package com.petcove.orderservice.model;
 import lombok.*;
 
 import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity

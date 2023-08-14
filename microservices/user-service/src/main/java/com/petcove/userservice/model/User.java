@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Table(name= "t_user")
@@ -27,7 +29,6 @@ public class User {
 
     private String phone;
 
-    @ElementCollection
-    private List<String> address;
+    private String address;
 
 }

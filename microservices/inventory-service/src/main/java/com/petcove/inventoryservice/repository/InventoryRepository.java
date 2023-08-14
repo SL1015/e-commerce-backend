@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.w3c.dom.Entity;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +19,12 @@ public interface InventoryRepository extends JpaRepository<Inventory,String> {
             " i.skuCode = :sku AND i.quantity >= :quan")
     List<Inventory> checkAvailability(@Param("sku") String skuCode, @Param("quan") Integer quantity);
 
+    @Query(value = "SELECT i FROM Inventory i WHERE " +
+            "(:category IS NULL OR i.category = :category) AND " +
+            "(:minPrice IS NULL OR i.price >= :minPrice) AND " +
+            "(:maxPrice IS NULL OR i.price <= :maxPrice)")
+    List<Inventory> filter(@Param("category") String category, @Param("minPrice") BigDecimal minPrice, @Param("maxPrice") BigDecimal maxPrice);
+
     List<Inventory> deleteBySkuCode(String skuCode);
 
-    //List<Inventory> findBySkuCodeAndQuantityGreaterThanEqual(List<String> skuCode, List<Integer> quantity);
 }
