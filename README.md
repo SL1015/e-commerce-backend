@@ -8,7 +8,7 @@ Maven
 Java 17  
 Docker
 ## Project Architecture
-![image](https://github.com/SL1015/e-commerce-backend/blob/main/architecture.png)
+![image](https://github.com/SL1015/e-commerce-backend/blob/main/architecture2.png)
 ## Run the application with Docker
 1. Run <code>mvn clean package -DskipTests</code> to build the applications.  
 2. Run <code>docker-compose up -d</code> to start the applications.
