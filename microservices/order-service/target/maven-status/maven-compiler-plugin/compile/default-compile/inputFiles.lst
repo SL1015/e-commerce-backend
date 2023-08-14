@@ -17,4 +17,5 @@ C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\order-service
 C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\order-service\src\main\java\com\petcove\orderservice\event\PaymentEvent.java
 C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\order-service\src\main\java\com\petcove\orderservice\model\Order.java
 C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\order-service\src\main\java\com\petcove\orderservice\controller\OrderController.java
+C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\order-service\src\main\java\com\petcove\orderservice\config\RedisConfiguration.java
 C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\order-service\src\main\java\com\petcove\orderservice\model\adapter\OrderAdapter.java
