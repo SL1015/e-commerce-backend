@@ -1,7 +1,7 @@
 # E-commerce-backend
 This repository contains an implementation of a microservices e-commerce backend with Spring boot.
 ## Tech stack
-Spring boot 3, OAuth2(KeyCloak), Eureka, Spring cloud gateway, Kafka, MySQL, PostgreSQL, Docker.
+Spring boot 3, OAuth2(KeyCloak), Eureka, Spring cloud gateway, Kafka, Redis, MySQL, PostgreSQL, Docker.
 ## Dependencies
 Spring Boot 3  
 Maven  
