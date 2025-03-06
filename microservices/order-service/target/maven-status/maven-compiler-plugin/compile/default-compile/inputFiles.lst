@@ -6,8 +6,10 @@ C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\order-service
 C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\order-service\src\main\java\com\petcove\orderservice\event\OrderItemEvent.java
 C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\order-service\src\main\java\com\petcove\orderservice\OrderServiceApplication.java
 C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\order-service\src\main\java\com\petcove\orderservice\dto\OrderRequest.java
+C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\order-service\src\main\java\com\petcove\orderservice\config\OpenAPIConfig.java
 C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\order-service\src\main\java\com\petcove\orderservice\repository\OrderRepository.java
 C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\order-service\src\main\java\com\petcove\orderservice\consumer\PaymentConsumer.java
+C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\order-service\src\main\java\com\petcove\orderservice\config\CorsConfig.java
 C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\order-service\src\main\java\com\petcove\orderservice\dto\InventoryResponse.java
 C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\order-service\src\main\java\com\petcove\orderservice\model\OrderLineItems.java
 C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\order-service\src\main\java\com\petcove\orderservice\dto\OrderLineItemsDto.java

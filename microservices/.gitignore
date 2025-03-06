@@ -1,0 +1,55 @@
+# Java / Spring Boot specific
+*.class
+*.jar
+*.war
+*.ear
+target/
+build/
+.idea/
+.vscode/
+
+# IntelliJ IDEA / JetBrains specific
+.idea/
+*.iml
+
+# Eclipse specific
+.project
+.classpath
+.settings/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Maven
+mvnw
+mvnw.cmd
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.debugBackup
+
+
+# Keycloak specific
+keycloak.json
+mysql_keycloak_data/
+realms/
+
+# Redis related
+dump.rdb
+redis.conf
+
+# PostgreSQL related
+*.sql
+*.bak
+
+# Spring Boot specific
+application.properties
+application.yml
+*.log
+
+# Eureka specific (If using eureka client)
+eureka/
+
+# Local environment configurations
+.env

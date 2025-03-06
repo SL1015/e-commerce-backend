@@ -3,6 +3,8 @@ C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\inventory-ser
 C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\inventory-service\src\main\java\com\petcove\inventoryservice\event\OrderItemEvent.java
 C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\inventory-service\src\main\java\com\petcove\inventoryservice\config\RedisConfiguration.java
 C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\inventory-service\src\main\java\com\petcove\inventoryservice\exception\ProductNotFoundException.java
+C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\inventory-service\src\main\java\com\petcove\inventoryservice\config\OpenAPIConfig.java
+C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\inventory-service\src\main\java\com\petcove\inventoryservice\config\CorsConfig.java
 C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\inventory-service\src\main\java\com\petcove\inventoryservice\controller\InventoryController.java
 C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\inventory-service\src\main\java\com\petcove\inventoryservice\model\adapter\InventoryAdapter.java
 C:\UZH\23spring\ecommerce-private\e-commerce-backend\microservices\inventory-service\src\main\java\com\petcove\inventoryservice\repository\InventoryRepository.java

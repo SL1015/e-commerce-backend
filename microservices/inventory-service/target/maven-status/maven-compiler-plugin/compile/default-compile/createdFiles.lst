@@ -1,5 +1,7 @@
 com\petcove\inventoryservice\dto\InventoryDto.class
+com\petcove\inventoryservice\config\RedisConfiguration.class
 com\petcove\inventoryservice\exception\ProductNotFoundException.class
+com\petcove\inventoryservice\config\OpenAPIConfig.class
 com\petcove\inventoryservice\model\Inventory$InventoryBuilder.class
 com\petcove\inventoryservice\repository\InventoryRepository.class
 com\petcove\inventoryservice\consumer\OrderPlacedConsumer.class
@@ -16,3 +18,4 @@ com\petcove\inventoryservice\dto\ProductCreateRequest.class
 com\petcove\inventoryservice\event\OrderPlacedEvent.class
 com\petcove\inventoryservice\model\Inventory.class
 com\petcove\inventoryservice\dto\InventoryDto$InventoryDtoBuilder.class
+com\petcove\inventoryservice\config\CorsConfig.class

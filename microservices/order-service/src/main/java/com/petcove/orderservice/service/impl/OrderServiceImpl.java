@@ -84,11 +84,12 @@ public class OrderServiceImpl implements OrderService {
             List<OrderLineItems> orderItems = order.getOrderLineItemsList();
             totalAmount = order.getTotalAmount();
             log.info(totalAmount.toString());
+            // compute total amount
             for(InventoryResponse inventoryResponse:inventoryResponseArr){
                 for(OrderLineItems orderItem:orderItems){
                     if(Objects.equals(orderItem.getSkuCode(), inventoryResponse.getSkuCode())){
                         orderItem.setPrice(inventoryResponse.getPrice());
-                        BigDecimal itemAmount = orderItem.getPrice().multiply(BigDecimal.valueOf(orderItem.getQuantity()));
+                        BigDecimal itemAmount = orderItem.getPrice().multiply(BigDecimal.valueOf(orderItem.getQuantity())); // total price
                         this.totalAmount =totalAmount.add(itemAmount);
                         log.info(totalAmount.toString());
                     }
@@ -99,8 +100,7 @@ public class OrderServiceImpl implements OrderService {
             log.info(order.getOrderLineItemsList().toString());
             orderRepository.save(order);
 
-            // send the order placed event as a msg to the notification topic
-            //kafkaTemplate.send("notificationTopic", new OrderPlacedEvent(order.getOrderNumber()));
+            // send order-placed event as a msg to orderplacedEvent topic
             kafkaTemplate.send("orderplacedEvent", new OrderPlacedEvent(order.getOrderNumber()
                     , order.getCustomerId()
                     , order.getTotalAmount()
